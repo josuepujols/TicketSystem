@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
         password: this.Password
       };
 
+
       this.AuthServices.register(NewUser).subscribe((data: IServerResponse) => {
 
 				data.status
