@@ -9,6 +9,7 @@
 	</div>
 
 	<form id="form-nav" class="card-body">
+    <h2 class="text-center">Registrar Ticket</h2>
 		<div class="mb-4 mt-5">
 			<input
 				[(ngModel)]="_share.Name"
@@ -16,42 +17,35 @@
 				type="text"
 				class="form-control"
 				id="exampleFormControlInput1"
-				placeholder="Nombre Usuario"
-			/>
-		</div>
-		<div class="mb-4">
-			<input
-				[(ngModel)]="_share.Password"
-				[ngModelOptions]="{ standalone: true }"
-				type="password"
-				class="form-control input-pass"
-				id="exampleFormControlInput1"
-				placeholder="Contraseña"
-			/>
-		</div>
-		<div class="mb-4">
-			<input
-				[(ngModel)]="_share.ConfirmPassword"
-				[ngModelOptions]="{ standalone: true }"
-				type="password"
-				class="form-control input-pass"
-				id="exampleFormControlInput1"
-				placeholder="Confirmar Contraseña"
+				placeholder="Titulo"
 			/>
 		</div>
 
-		<div class="custom-control custom-checkbox">
-			<input
-				(ngModelChange)="_share.ChangeInputStatus()"
-				[(ngModel)]="_share.ShowPassword"
+		<div class="mb-4">
+			<textarea
+      [(ngModel)]="_share.Password"
 				[ngModelOptions]="{ standalone: true }"
-				type="checkbox"
-				class="custom-control-input"
-				id="customCheck1"
-			/>
-			<label class="custom-control-label" for="customCheck1"
-				>Ver Contraseña</label
-			>
+				type="password"
+				class="form-control input-pass p-3"
+				id="text-description"
+				placeholder="Descripcion">
+      </textarea>
+
+		</div>
+
+    <div class="mb-4">
+      <div class="row">
+        <div class="col d-flex flex-row justify-content-end">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{SelectTitle}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button (click)="LowPriority()" class="text-success text-bold" ngbDropdownItem>Baja</button>
+              <button (click)="MediumPriority()" class="text-warning" ngbDropdownItem>Promedio</button>
+              <button (click)="HighPriority()" class="text-danger" ngbDropdownItem>Alta</button>
+            </div>
+          </div>
+        </div>
+      </div>
 		</div>
 	</form>
 
@@ -60,8 +54,7 @@
 			<div class="col-md-6">
 				<button
 					class="btn btn-block btn-secondary"
-					(click)="_share.ClearForm()"
-				>
+					(click)="_share.ClearForm()">
 					Limpiar
 				</button>
 			</div>

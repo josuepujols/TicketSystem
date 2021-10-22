@@ -1,5 +1,11 @@
 #card {
   //margin-top: -125px;
+  h2 {
+    font-family: 'Anton', sans-serif;
+  }
+  #text-description {
+    resize: none;
+  }
 }
 .card-hearder {
 	display: flex;
