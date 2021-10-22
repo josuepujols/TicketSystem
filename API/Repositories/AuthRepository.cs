@@ -105,8 +105,8 @@ namespace API.Repositories
 
             await _usersRepo.AddAsync(user);
             return await _context.SaveChangesAsync() > 0
-            ? new ServerResponse { Title = "Registration process succed", Message = "User created successfully", Status = true }
-            : new ServerResponse { Title = "Registration process failed", Message = "User registration failed", Status = false };       
+            ? new ServerResponse { Title = "¡Usuario Creado!", Message = "Usuario Registrado con Exito", Status = true }
+            : new ServerResponse { Title = "¡Error!", Message = "No se Pudo Registrar el Usuario", Status = false };       
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)

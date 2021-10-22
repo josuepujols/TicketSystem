@@ -11,7 +11,7 @@
 	<form id="form-nav" class="card-body">
 		<div class="mb-4 mt-5">
 			<input
-				[(ngModel)]="Name"
+				[(ngModel)]="_share.Name"
 				[ngModelOptions]="{ standalone: true }"
 				type="text"
 				class="form-control"
@@ -21,20 +21,20 @@
 		</div>
 		<div class="mb-4">
 			<input
-				[(ngModel)]="Password"
+				[(ngModel)]="_share.Password"
 				[ngModelOptions]="{ standalone: true }"
 				type="password"
-				class="form-control input-register"
+				class="form-control input-pass"
 				id="exampleFormControlInput1"
 				placeholder="Contraseña"
 			/>
 		</div>
 		<div class="mb-4">
 			<input
-				[(ngModel)]="ConfirmPassword"
+				[(ngModel)]="_share.ConfirmPassword"
 				[ngModelOptions]="{ standalone: true }"
 				type="password"
-				class="form-control input-register"
+				class="form-control input-pass"
 				id="exampleFormControlInput1"
 				placeholder="Confirmar Contraseña"
 			/>
@@ -42,8 +42,8 @@
 
 		<div class="custom-control custom-checkbox">
 			<input
-				(ngModelChange)="ChangeInputStatus()"
-				[(ngModel)]="ShowPassword"
+				(ngModelChange)="_share.ChangeInputStatus()"
+				[(ngModel)]="_share.ShowPassword"
 				[ngModelOptions]="{ standalone: true }"
 				type="checkbox"
 				class="custom-control-input"
@@ -60,7 +60,7 @@
 			<div class="col-md-6">
 				<button
 					class="btn btn-block btn-secondary"
-					(click)="ClearForm()"
+					(click)="_share.ClearForm()"
 				>
 					Limpiar
 				</button>
