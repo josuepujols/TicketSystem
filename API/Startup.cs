@@ -38,7 +38,7 @@ namespace API
                 // options.JsonSerializerOptions.Converters.Add(); TODO: add custom Json converter
             });
             services.AddCors(opt => opt.AddPolicy(CustomPolicy, builder => {
-                builder.AllowAnyOrigin()
+                builder.AllowAnyOrigin() // TODO: change this to exact domain (origin) later
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
