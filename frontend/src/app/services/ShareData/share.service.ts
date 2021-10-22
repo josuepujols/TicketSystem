@@ -10,11 +10,17 @@ export class ShareService {
 	public ConfirmPassword: string;
 	public ShowPassword: boolean;
 
+	public username: string;
+	public loginPassword: string;
+
   constructor() {
     this.Name = '';
 		this.Password = '';
 		this.ConfirmPassword = '';
 		this.ShowPassword = false;
+
+		this.username = '';
+		this.loginPassword = '';
   }
 
   public ClearForm() {

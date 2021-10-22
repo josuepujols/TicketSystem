@@ -8,6 +8,7 @@ import { IServerResponse } from 'src/app/Interfaces/iServerResponse';
 import { Router } from '@angular/router';
 import { ToastService } from '../toast/toast.service';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { ShareService } from '../ShareData/share.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -22,15 +23,18 @@ export class AuthService {
 	constructor(
 		private $http: HttpClient,
 		private $router: Router,
-		private _toast: ToastService
+		private _toast: ToastService,
+		private _shared: ShareService
 	) {}
 
 	login(model: ILogin): void {
+		console.log(model)
 		this.$http
 			.post<ILoginResponse>(this.endPoint + '/login', model)
 			.subscribe((data: ILoginResponse) => {
 				if (data.status) {
 					this.saveSession(data);
+					this._shared.ClearForm();
 					this.$router.navigate(['dashboard']); // TODO: navigate to Dashboard Component, create the component
 					this._toast.ShowSuccess({
 						title: 'login succed',

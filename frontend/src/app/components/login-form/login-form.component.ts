@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/authentication/auth.service';
+import { ShareService } from '../../services/ShareData/share.service';
 
 @Component({
   selector: 'app-login-form',
@@ -8,22 +9,13 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  username: string = '';
-  password: string = '';
-
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, public _shared: ShareService) { }
 
   ngOnInit(): void {
   }
 
   OnSubmit(): void {
-    this._auth.login({ username: this.username, password: this.password});
-    this.clearForm();
+    console.log({ username: this._shared.Name, password: this._shared.Password })
+   this._auth.login({ username: this._shared.username, password: this._shared.loginPassword });
   }
-
-  clearForm(): void {
-    this.username = '';
-		this.password = '';
-  }
-
 }
