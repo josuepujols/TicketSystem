@@ -17,5 +17,4 @@ export class ToastService {
 		this._toast.error(model.message, model.title, { timeOut: 3000 });
 	}
 
-
 }
