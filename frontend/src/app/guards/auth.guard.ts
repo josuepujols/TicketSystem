@@ -14,7 +14,10 @@ export class AuthGuard implements CanActivate {
     let isAuthenticated = false;		
 		
     this._auth.isAuthenticated$
-		.subscribe((resp: boolean) => isAuthenticated = resp);
+		.subscribe((resp: boolean) => {
+      console.log(resp ? 'Is authenticated' : 'Not Authenticated');
+      isAuthenticated = resp
+    });
 		
     return isAuthenticated; 
   }

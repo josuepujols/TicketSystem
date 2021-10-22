@@ -15,7 +15,7 @@ import { ShareService } from '../ShareData/share.service';
 })
 export class AuthService {
 	private endPoint = environment.api_url + 'auth';
-	private currentUserSource = new ReplaySubject<ILoginResponse | null>(1);
+	private currentUserSource = new ReplaySubject<string | null>(1);
 	public currentUser$ = this.currentUserSource.asObservable();
 	private isAuthenticatedSource = new BehaviorSubject<boolean>(false);
 	public isAuthenticated$ = this.isAuthenticatedSource.asObservable();
@@ -28,7 +28,6 @@ export class AuthService {
 	) {}
 
 	login(model: ILogin): void {
-		console.log(model)
 		this.$http
 			.post<ILoginResponse>(this.endPoint + '/login', model)
 			.subscribe((data: ILoginResponse) => {
@@ -41,11 +40,13 @@ export class AuthService {
 						message: 'Welcome back',
 					});
 				}
-
-				this._toast.ShowFailure({
-					title: 'Login failed',
-					message: 'Login process failed',
-				});
+				else {
+					this._toast.ShowFailure({
+						title: 'Login failed',
+						message: 'Login process failed',
+					});
+				}
+				
 			});
 	}
 
@@ -57,7 +58,7 @@ export class AuthService {
 		sessionStorage.setItem('userId', userId);
 
 		this.isAuthenticatedSource.next(true);
-		this.currentUserSource.next(data);
+		this.currentUserSource.next(username);
 	}
 
 	register(model: IRegister): Observable<IServerResponse> {
@@ -68,7 +69,7 @@ export class AuthService {
 		sessionStorage.clear();
 		this.currentUserSource.next();
 		this.isAuthenticatedSource.next(false);
-		this.$router.navigateByUrl('/');
+		this.$router.navigate(['']);
 	}
 
 	CheckStatus(): void {
@@ -87,13 +88,7 @@ export class AuthService {
 		const userId = sessionStorage.getItem('userId');
 
 		username != null && token != null && userId != null
-			? this.currentUserSource.next({
-					username: username,
-					token: token,
-					userId: userId,
-					role: '',
-					status: true,
-			  })
+			? this.currentUserSource.next(username)
 			: this.currentUserSource.next();
 	}
 }
