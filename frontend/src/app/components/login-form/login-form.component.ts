@@ -16,6 +16,6 @@ export class LoginFormComponent implements OnInit {
 
   OnSubmit(): void {
     console.log({ username: this._shared.Name, password: this._shared.Password })
-   this._auth.login({ username: this._shared.username, password: this._shared.loginPassword });
+    this._auth.login({ username: this._shared.username, password: this._shared.loginPassword });
   }
 }

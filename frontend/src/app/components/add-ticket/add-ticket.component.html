@@ -1,0 +1,76 @@
+<div id="card" class="card bg-light text-dark col-md-6">
+	<div id="logo-container" class="card-hearder">
+		<img
+			id="header-image"
+			class=""
+			src="../../../assets/Fuerzasarmadasdominicanasarregladocheposo.svg"
+			alt="Mide Logo"
+		/>
+	</div>
+
+	<form id="form-nav" class="card-body">
+		<div class="mb-4 mt-5">
+			<input
+				[(ngModel)]="_share.Name"
+				[ngModelOptions]="{ standalone: true }"
+				type="text"
+				class="form-control"
+				id="exampleFormControlInput1"
+				placeholder="Nombre Usuario"
+			/>
+		</div>
+		<div class="mb-4">
+			<input
+				[(ngModel)]="_share.Password"
+				[ngModelOptions]="{ standalone: true }"
+				type="password"
+				class="form-control input-pass"
+				id="exampleFormControlInput1"
+				placeholder="Contraseña"
+			/>
+		</div>
+		<div class="mb-4">
+			<input
+				[(ngModel)]="_share.ConfirmPassword"
+				[ngModelOptions]="{ standalone: true }"
+				type="password"
+				class="form-control input-pass"
+				id="exampleFormControlInput1"
+				placeholder="Confirmar Contraseña"
+			/>
+		</div>
+
+		<div class="custom-control custom-checkbox">
+			<input
+				(ngModelChange)="_share.ChangeInputStatus()"
+				[(ngModel)]="_share.ShowPassword"
+				[ngModelOptions]="{ standalone: true }"
+				type="checkbox"
+				class="custom-control-input"
+				id="customCheck1"
+			/>
+			<label class="custom-control-label" for="customCheck1"
+				>Ver Contraseña</label
+			>
+		</div>
+	</form>
+
+	<div class="card-footer">
+		<div class="row">
+			<div class="col-md-6">
+				<button
+					class="btn btn-block btn-secondary"
+					(click)="_share.ClearForm()"
+				>
+					Limpiar
+				</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-block btn-success">
+					Registrar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
