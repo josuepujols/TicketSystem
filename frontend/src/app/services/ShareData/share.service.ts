@@ -28,6 +28,8 @@ export class ShareService {
 		this.Password = '';
 		this.ConfirmPassword = '';
     this.ShowPassword = false;
+    this.username = '';
+    this.loginPassword = '';
 	}
 
   public ChangeInputStatus() {

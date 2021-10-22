@@ -1,0 +1,13 @@
+#card {
+  //margin-top: -125px;
+}
+.card-hearder {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-top: 1.5em;
+	#header-image {
+		width: 35%;
+	}
+}

@@ -41,11 +41,13 @@ export class AuthService {
 						message: 'Welcome back',
 					});
 				}
+        else {
+          this._toast.ShowFailure({
+            title: 'Login failed',
+            message: 'Login process failed',
+          });
+        }
 
-				this._toast.ShowFailure({
-					title: 'Login failed',
-					message: 'Login process failed',
-				});
 			});
 	}
 
