@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AddTicketComponent } from './components/add-ticket/add-ticket.component';
+import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddTicketComponent } from './components/add-ticket/add-ticket.component
     DashboardComponent,
     RegisterFormComponent,
     LoginFormComponent,
-    AddTicketComponent
+    AddTicketComponent,
+    TicketsTableComponent
   ],
   imports: [
     BrowserModule,

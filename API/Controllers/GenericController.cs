@@ -12,7 +12,7 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Admin)]
     public class GenericController<T> : BaseController where T : class
     {
         private IUnitOfWork<T> _uof;
@@ -24,8 +24,7 @@ namespace API.Controllers
             _repo = _uof.TRepository;
         }
 
-        [HttpGet]
-        [Authorize(Roles = UserRoles.Admin)]
+        [HttpGet]        
         public async Task<ActionResult> GetAll([FromQuery] PaginationFilter filters)
         {
             try
@@ -51,7 +50,7 @@ namespace API.Controllers
             }
         }
 
-        // TODO: Make the creation only accesible for Admin users
+              
         [HttpPost("create")]
         public async Task<ActionResult> Create(T model)
         {
@@ -83,7 +82,6 @@ namespace API.Controllers
 
        
         [HttpDelete("remove/{id}")]
-        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> Delete(Guid id)
         {
              try 
