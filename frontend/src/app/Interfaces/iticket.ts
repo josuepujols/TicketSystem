@@ -3,7 +3,7 @@ export interface ITicket {
 	title: string;
 	description: string;
 	importance: number;
-	userId: string;
+	userId?: string;
 	assignTo: string;
-	isCompleted: boolean;
+	isCompleted?: boolean;
 }

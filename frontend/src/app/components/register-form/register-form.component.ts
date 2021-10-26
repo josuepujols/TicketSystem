@@ -26,7 +26,7 @@ export class RegisterFormComponent implements OnInit {
 		if(this._share.Name != "") {
       if (this._share.Password == this._share.ConfirmPassword) {
         //Creo el objeto a enviar
-        let NewUser: IRegister = {
+        const NewUser: IRegister = {
           username: this._share.Name,
           password: this._share.Password,
         };
