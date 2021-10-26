@@ -9,6 +9,7 @@ namespace API.Interfaces
     {
         IGenericRepository<T> TRepository { get; }
         IAuthRepository AuthRepository { get; }
+        IAssignmentRepository AssignmentRepository { get; }
         Task<bool> CommitChangesAsync();
     }
 }
