@@ -52,10 +52,15 @@ export class AddTicketComponent implements OnInit {
       description: this.TicketDescripcion,
       importance: this.PriorityNumber,
       userId: UserId?.toString(),
-      assignTo: "d",
-      isCompleted: false
+      assignTo: "C7425707-16B9-4547-9A66-42766F7683F4"
     };
-    console.log(NewTicket);
+
+    if(this.TicketName != "" && this.PriorityNumber != 0) {
+      this._ticket.createTicket(NewTicket).subscribe(data => {
+        console.log(data);
+      });
+    }
+
   }
 
 }
