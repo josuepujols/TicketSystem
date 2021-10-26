@@ -12,7 +12,7 @@ namespace API.Models
         public Priority Importance { get; set; }
         public Guid UserId { get; set; }
         public Guid AssignTo { get; set; }
-        public bool IsCompleted { get; set; } = false; // FIXME: Should create False as default
+        public bool IsCompleted { get; set; } = false; 
         
         public Ticket()
         {

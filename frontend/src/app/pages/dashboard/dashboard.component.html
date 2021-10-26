@@ -3,7 +3,9 @@
     <ul ngbNav #nav="ngbNav" class="nav-tabs w-100 d-flex flex-row justify-content-center">
       <li ngbNavItem  [ngbNavItem]="1" class="col-md-4 text-center">
         <a ngbNavLink class="hover-tab">Tickets</a>
-        <ng-template ngbNavContent>First content</ng-template>
+        <ng-template ngbNavContent>
+          <app-tickets-table></app-tickets-table>
+        </ng-template>
       </li>
       <li ngbNavItem [ngbNavItem]="2" class="col-md-4 text-center">
         <a ngbNavLink class="hover-tab">Registrar Ticket</a>

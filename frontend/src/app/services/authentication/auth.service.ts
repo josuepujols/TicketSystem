@@ -56,6 +56,7 @@ export class AuthService {
 		sessionStorage.setItem('token', token);
 		sessionStorage.setItem('username', username);
 		sessionStorage.setItem('userId', userId);
+		sessionStorage.setItem('role', role);
 
 		this.isAuthenticatedSource.next(true);
 		this.currentUserSource.next(username);

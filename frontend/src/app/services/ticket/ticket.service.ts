@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -10,15 +10,33 @@ import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 	providedIn: 'root',
 })
 export class TicketService {
-	private endPoint = environment.api_url + 'ticket';
+	private endPoint = environment.api_url + 'tickets';
 
 	constructor(private $http: HttpClient) {}
 
-	getAllTickets(
+	// This limits user to have access to only their assign tickets
+	getAllUserTickets(
 		filters: IPaginationFilter,
 		userId: string
 	): Observable<IPagedData> {
-		return this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all`);
+		
+		const params = new HttpParams()
+		.set('pageNumber', filters.pageNumber)
+		.set('pageSize', filters.pageSize)
+		.set('searchTerm', filters.searchTerm);
+
+		return this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all?`, { params: params });
+	}
+
+	// For Admin Roles only 
+	getAllTickets(filters: IPaginationFilter): Observable<IPagedData> {	
+
+		const params = new HttpParams()
+		.set('pageNumber', filters.pageNumber)
+		.set('pageSize', filters.pageSize)
+		.set('searchTerm', filters.searchTerm);
+
+		return this.$http.get<IPagedData>(`${this.endPoint}/all`, { params: params });
 	}
 
 	createTicket(model: ITicket): void {
