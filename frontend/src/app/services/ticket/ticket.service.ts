@@ -21,10 +21,8 @@ export class TicketService {
 		return this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all`);
 	}
 
-	createTicket(model: ITicket): void {
-		this.$http
-			.post<boolean>(`${this.endPoint}/create`, model)
-			.subscribe((data) => console.log(data));
+	createTicket(model: ITicket): Observable<boolean> {
+		return this.$http.post<boolean>(`${this.endPoint}/create`, model);
 	}
 
 	getTicketById(id: string): Observable<ITicket> {
