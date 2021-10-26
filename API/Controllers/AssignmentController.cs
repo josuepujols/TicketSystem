@@ -18,7 +18,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAssignMember()
         {
-            var assignUser = await _uof.AssignmentRepository.GetAssignMember();
+            var assignUser = await _uof.AssignmentRepository.GetAssignMember(); // TODO: create the AssigmentRepository
             return Ok(new { username = assignUser });
         }
     }
