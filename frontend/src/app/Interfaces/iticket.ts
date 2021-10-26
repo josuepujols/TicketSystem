@@ -4,6 +4,6 @@ export interface ITicket {
 	description: string;
 	importance: number;
 	userId?: string;
-	assignTo: string;
+	assignTo?: string;
 	isCompleted?: boolean;
 }

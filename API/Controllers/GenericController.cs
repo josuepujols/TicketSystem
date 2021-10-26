@@ -12,7 +12,8 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Authorize(Roles = UserRoles.Admin)]
+    //[Authorize(Roles = UserRoles.Admin)]
+    [AllowAnonymous]
     public class GenericController<T> : BaseController where T : class
     {
         private IUnitOfWork<T> _uof;
@@ -50,7 +51,7 @@ namespace API.Controllers
             }
         }
 
-              
+
         [HttpPost("create")]
         public async Task<ActionResult> Create(T model)
         {

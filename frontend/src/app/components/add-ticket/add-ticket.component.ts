@@ -44,7 +44,6 @@ export class AddTicketComponent implements OnInit {
 
   //Method to add a new ticket
   CreateTicket() {
-    //.subscribe((data) => console.log(data));
     //Object to send
     const UserId = sessionStorage.getItem('userId');
     const NewTicket:ITicket = {
