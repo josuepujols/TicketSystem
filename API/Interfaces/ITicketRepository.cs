@@ -10,5 +10,6 @@ namespace API.Interfaces
     public interface ITicketRepository
     {
         Task<PagedData<Ticket>> GetUserTickets(PaginationFilter filters, string userId);
+        Task<IEnumerable<object>> GetSupportPersonal();
     }
 }

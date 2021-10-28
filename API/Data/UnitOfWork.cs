@@ -20,8 +20,6 @@ namespace API.Data
 
         public IAuthRepository AuthRepository { get; }
 
-        public IAssignmentRepository AssignmentRepository { get; }
-
         public async Task<bool> CommitChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;

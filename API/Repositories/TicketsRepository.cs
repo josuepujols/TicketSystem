@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
@@ -15,6 +16,12 @@ namespace API.Repositories
         public TicketsRepository(ApiContext context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<object>> GetSupportPersonal()
+        {
+            var members = await _context.AppUsers.Where(x => ((int) x.Role) == 2).ToListAsync();
+            return members.Select(x => new { x.Id, x.Username });            
         }
 
         public async Task<PagedData<Ticket>> GetUserTickets(PaginationFilter filters, string userId)

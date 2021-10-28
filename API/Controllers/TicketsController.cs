@@ -19,6 +19,21 @@ namespace API.Controllers
             _repo = repository;        
         }
 
+        [HttpGet("personal")]
+        public async Task<ActionResult> GetSupportMembes()
+        {
+            try 
+            {
+                return Ok(await _repo.GetSupportPersonal());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
+
+        }
+
         [HttpGet("{userId}/all")]
         public async Task<ActionResult<PagedData<Ticket>>> GetAllUserTickets([FromQuery] PaginationFilter filters, string userId)
         {
