@@ -34,6 +34,13 @@ namespace API.Repositories
 
                 var totalTickets = await _context.Tickets.CountAsync<Ticket>();
 
+                //var 
+
+                foreach (var item in tickets)
+                {
+                    
+                }
+
                 var response = new PagedData<Ticket>()
                 {
                     TotalCount = totalTickets,

@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ITicket } from '../../Interfaces/iticket';
 import { IPagedData } from 'src/app/Interfaces/ipaged-data';
 import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
+import { ISupports } from 'src/app/Interfaces/isupport';
 
 @Injectable({
 	providedIn: 'root',
@@ -47,6 +48,10 @@ export class TicketService {
 				this.ticketSource.next(data);
 			});
 	}
+
+  GetSupportMembes(): Observable<ISupports[]> {
+    return this.$http.get<ISupports[]>(`${this.endPoint}/personal`);
+  }
 
 	createTicket(model: ITicket): Observable<boolean> {
 		return this.$http.post<boolean>(`${this.endPoint}/create`, model);
