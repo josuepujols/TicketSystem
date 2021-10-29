@@ -41,7 +41,6 @@ export class AddTicketComponent implements OnInit {
     this.PriorityNumber = 3;
     this.SelectTitle = "Alta";
   }
-
   //Method to add a new ticket
   CreateTicket() {
     //Object to send
