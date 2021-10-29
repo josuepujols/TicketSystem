@@ -5,6 +5,8 @@ import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 import { ITicket } from 'src/app/Interfaces/iticket';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
 	selector: 'app-tickets-table',
 	templateUrl: './tickets-table.component.html',
@@ -17,6 +19,10 @@ export class TicketsTableComponent implements OnInit {
 		pageSize: 10,
 		searchTerm: '',
 	};
+
+	faEdit = faEdit;
+	faEye = faEye;
+	faTrash = faTrash;
 
 	constructor(private _ticket: TicketService) {}
 

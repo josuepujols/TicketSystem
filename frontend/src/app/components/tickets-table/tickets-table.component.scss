@@ -12,16 +12,22 @@
 
 .tag {
 	border-radius: 0.3em;
-	padding: 0.3em 0.4em;
-	font-weight: 600;
+	padding: 0.3em 0.5em;
+	font-size: 0.8rem;
+	font-weight: bold;
+	text-align: center;
 }
 
-.tag-success {
+.success {
 	background-color: rgb(101, 190, 101);
 	color: whitesmoke;
 }
 
-.tag-warning {
+.warning {
 	background-color: rgb(204, 192, 85);
-	color: black;
+	color: rgb(59, 59, 59);
+}
+.danger {
+	background-color: rgb(235, 98, 98);
+	color: whitesmoke;
 }

@@ -11,6 +11,7 @@ namespace API.Models
         public string Description { get; set; }
         public Priority Importance { get; set; }
         public Guid UserId { get; set; }
+        public virtual AppUser User { get; set; }        
         public Nullable<Guid> AssignTo { get; set; }
         public bool IsCompleted { get; set; } = false; 
         
