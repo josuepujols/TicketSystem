@@ -1,3 +1,4 @@
+import { ToastService } from './../../services/toast/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IPagedData } from 'src/app/Interfaces/ipaged-data';
@@ -15,6 +16,7 @@ import { ModalService } from 'src/app/services/modal/modal.service';
 })
 export class TicketsTableComponent implements OnInit {
 	results$: Observable<IPagedData | null> = this._ticket.ticketsObserver$;
+  public UsersSupports:any[];
 	filters: IPaginationFilter = {
 		pageNumber: 1,
 		pageSize: 10,
@@ -25,10 +27,17 @@ export class TicketsTableComponent implements OnInit {
 	faEye = faEye;
 	faTrash = faTrash;
 
-	constructor(private _ticket: TicketService, private _modal: ModalService) {}
+	constructor(private _ticket: TicketService, private _modal: ModalService, private _toast:ToastService) {
+    this.UsersSupports = [];
+  }
 
 	ngOnInit(): void {
 		this.getTickets();
+    this._ticket.GetSupportMembes().subscribe(data => {
+      data.forEach(item => {
+        this.UsersSupports.push(item);
+      });
+    });
 	}
 
 	getTickets(): void {
@@ -45,5 +54,17 @@ export class TicketsTableComponent implements OnInit {
 	open(content: any) {
 		this._modal.showModal(content);
 	}
+
+  UpdateTicket(ticket:ITicket) {
+    console.log(ticket);
+    // this._ticket.updateTicket(ticket).subscribe((data) => {
+    //   if (data) {
+    //     this._toast.ShowSuccess({title: "Exito!", message: "Se ha actualizado el ticket correctamente."});
+    //   }
+    //   else {
+    //     this._toast.ShowFailure({title: "Error!", message: "No se pudo actualizado el ticket."});
+    //   }
+    // });
+  }
 
 }

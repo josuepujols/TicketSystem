@@ -61,10 +61,8 @@ export class TicketService {
 		return this.$http.get<ITicket>(`${this.endPoint}/${id}`);
 	}
 
-	updateTicket(model: ITicket): void {
-		this.$http
-			.put(`${this.endPoint}/edit/${model.id}`, model)
-			.subscribe((data) => console.log(data));
+	updateTicket(model: ITicket): Observable<ITicket> {
+		return this.$http.put<ITicket>(`${this.endPoint}/edit/${model.id}`, model);
 	}
 
 	deleteTicket(id: string): void {

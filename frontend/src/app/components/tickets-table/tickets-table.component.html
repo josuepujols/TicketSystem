@@ -1,5 +1,5 @@
-<div class="container-fluid">
-	<table class="table table-hover table-responsive">
+<div class="container-fluid d-flex flex-row justify-content-center align-items-center">
+	<table class="table table-hover table-responsive w-75 mt-4">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -55,7 +55,7 @@
 				<!-- modal template -->
 				<ng-template #content let-c="close" let-d="dismiss">
 					<div class="modal-header">
-					  <h4 class="modal-title" id="modal-basic-title">{{ item.title }}</h4>
+					  <input class="modal-title form-control w-75 p-4" id="modal-basic-title" [(ngModel)]="item.title" [ngModelOptions]="{ standalone: true }">
 					  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
 						<span aria-hidden="true">&times;</span>
 					  </button>
@@ -63,25 +63,36 @@
 					<div class="modal-body">
 					 <div class="row">
 						 <div class="col-md-12">
-							 <textarea [value]="item.description" cols="60" rows="5" class="form-control"></textarea>
+							 <textarea [(ngModel)]="item.description" cols="60" rows="5" class="form-control"></textarea>
 						</div>
 					 </div>
-					 <div class="row">
+					 <div class="row mt-3">
 						 <div class="col-md-6">
-							 <div class="form-group"><label for="">Prioridad: </label><select name="" id="" class="form-control"></select></div>
+							 <div class="form-group"><label for="">Asignar a: </label>
+                <select name="" id="" class="form-control">
+                  <option disabled selected>Seleccionar Usuario</option>
+                  <option class="text-black" *ngFor="let item of UsersSupports;" value="{{item.id}}">
+                    {{item.username}}
+                  </option>
+               </select>
+              </div>
 						 </div>
 						 <div class="col-md-6">
-							 <div class="form-group"><label for="">Asignar a: </label><select name="" id="" class="form-control"></select></div>
+							 <div class="form-group"><label for="">Prioridad: </label>
+                <select name="" id="" class="form-control">
+                  <option disabled selected>Seleccionar Prioridad</option>
+                  <option class="text-success" value="1">Baja</option>
+                  <option class="text-warning" value="2">Promedio</option>
+                  <option class="text-danger" value="3">Alta</option>
+               </select>
+              </div>
 						 </div>
 					 </div>
 					</div>
 					<div class="modal-footer">
-					  <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+					  <button type="button" class="btn btn-outline-dark mr-3" (click)="UpdateTicket(item)">Guardar</button>
 					</div>
 				  </ng-template>
-				  
-		
-
 			</tr>
 		</tbody>
 	</table>
