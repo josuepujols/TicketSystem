@@ -1,26 +1,10 @@
-<table class="table table-reponsive table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <td class="th">#</td>
-            <td class="th">Title</td>
-            <td class="th">Description</td>
-            <td class="th">Importance</td>
-            <td class="th">UserId</td>
-            <td class="th">AssignTo</td>
-            <td class="th">IsCompleted</td>
-            <th class="th">Options</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item in results; index as i">
-            <th scope="row">{{ i + 1}}</th>
-            <td>{{ item.title }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.importance }}</td>
-            <td>{{ item.userId }}</td>
-            <td>{{ item.assignTo }}</td>
-            <td>{{ item.isCompleted }}</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container-fluid">
+	<div id="tickets-list" class="row">
+		<div
+			class="col-md-3"
+			*ngFor="let item of results$ | async | json; index as i"
+		>
+			{{ item }}
+		</div>
+	</div>
+</div>
