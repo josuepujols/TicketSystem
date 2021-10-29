@@ -5,6 +5,9 @@ import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 import { ITicket } from 'src/app/Interfaces/iticket';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 
+import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { ModalService } from 'src/app/services/modal/modal.service';
+
 @Component({
 	selector: 'app-tickets-table',
 	templateUrl: './tickets-table.component.html',
@@ -18,7 +21,11 @@ export class TicketsTableComponent implements OnInit {
 		searchTerm: '',
 	};
 
-	constructor(private _ticket: TicketService) {}
+	faEdit = faEdit;
+	faEye = faEye;
+	faTrash = faTrash;
+
+	constructor(private _ticket: TicketService, private _modal: ModalService) {}
 
 	ngOnInit(): void {
 		this.getTickets();
@@ -34,4 +41,5 @@ export class TicketsTableComponent implements OnInit {
 				: this._ticket.getAllUserTickets(this.filters, userId);
 		}
 	}
+
 }

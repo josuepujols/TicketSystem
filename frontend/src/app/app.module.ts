@@ -16,6 +16,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AddTicketComponent } from './components/add-ticket/add-ticket.component';
 import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { TicketsTableComponent } from './components/tickets-table/tickets-table.
 			},
 		}),
 		BrowserAnimationsModule,
+  FontAwesomeModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
