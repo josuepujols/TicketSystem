@@ -44,7 +44,7 @@
 					<span class="btn text-secondary">
 						<fa-icon [icon]="faEdit"></fa-icon>
 					</span>
-					<span class="btn text-info">
+					<span class="btn text-info" (click)="open(content)">
 						<fa-icon [icon]="faEye"></fa-icon>
 					</span>
 					<span class="btn text-danger">
@@ -55,13 +55,25 @@
 				<!-- modal template -->
 				<ng-template #content let-c="close" let-d="dismiss">
 					<div class="modal-header">
-					  <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+					  <h4 class="modal-title" id="modal-basic-title">{{ item.title }}</h4>
 					  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
 						<span aria-hidden="true">&times;</span>
 					  </button>
 					</div>
 					<div class="modal-body">
-					  <p>Hello, World!</p>
+					 <div class="row">
+						 <div class="col-md-12">
+							 <textarea [value]="item.description" cols="60" rows="5" class="form-control"></textarea>
+						</div>
+					 </div>
+					 <div class="row">
+						 <div class="col-md-6">
+							 <div class="form-group"><label for="">Prioridad: </label><select name="" id="" class="form-control"></select></div>
+						 </div>
+						 <div class="col-md-6">
+							 <div class="form-group"><label for="">Asignar a: </label><select name="" id="" class="form-control"></select></div>
+						 </div>
+					 </div>
 					</div>
 					<div class="modal-footer">
 					  <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>

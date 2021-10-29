@@ -42,4 +42,8 @@ export class TicketsTableComponent implements OnInit {
 		}
 	}
 
+	open(content: any) {
+		this._modal.showModal(content);
+	}
+
 }
