@@ -47,10 +47,12 @@
 					<span class="btn text-info" (click)="open(content)">
 						<fa-icon [icon]="faEye"></fa-icon>
 					</span>
-					<span class="btn text-danger">
+					<span class="btn text-danger" (click)="deleteTicket(item)">
 						<fa-icon [icon]="faTrash"></fa-icon>
 					</span>
 				</td>
+
+				<ngx-confirm-box [bgColor]="confirmBoxProp.bgColor" [confirmHeading]="confirmBoxProp.confirmHeading" [confirmCanceltext]="confirmBoxProp.confirmCanceltext" [confirmContent]= "confirmBoxProp.confirmContent" [confirmOkaytext] = "confirmBoxProp.confirmOkaytext" (confirmEvt)="confirmChange($event)"></ngx-confirm-box>
 
 				<!-- modal template -->
 				<ng-template #content let-c="close" let-d="dismiss">

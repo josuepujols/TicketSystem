@@ -7,6 +7,7 @@ import { TicketService } from 'src/app/services/ticket/ticket.service';
 
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from 'src/app/services/modal/modal.service';
+import { ConfirmboxService } from 'src/app/services/confirmbox/confirmbox.service';
 
 @Component({
 	selector: 'app-tickets-table',
@@ -21,11 +22,24 @@ export class TicketsTableComponent implements OnInit {
 		searchTerm: '',
 	};
 
+	// actions icons 
 	faEdit = faEdit;
 	faEye = faEye;
 	faTrash = faTrash;
 
-	constructor(private _ticket: TicketService, private _modal: ModalService) {}
+	// Ticket to be remove from DB
+	private selectedTicket!: string | undefined;
+
+
+	confirmBoxProp = {
+		bgColor: 'rgba(0,0,0,0.5)',
+		confirmHeading: 'Desea borrar este ticket ?',
+		confirmContent: 'El siguiente ticket sera eliminado de los registros',
+		confirmCanceltext: 'Cancelar',
+		confirmOkaytext: 'Aceptar'
+	};
+
+	constructor(private _ticket: TicketService, private _modal: ModalService, private _confirmBox: ConfirmboxService) {}
 
 	ngOnInit(): void {
 		this.getTickets();
@@ -44,6 +58,16 @@ export class TicketsTableComponent implements OnInit {
 
 	open(content: any) {
 		this._modal.showModal(content);
+	}
+
+	deleteTicket(ticket: ITicket): void {
+		this.selectedTicket = ticket.id?.toString();
+		this._confirmBox.showConfirmBox();
+	}
+
+	
+	confirmChange(event: boolean): void {
+		this._confirmBox.confirmChange(event, this.selectedTicket);
 	}
 
 }
