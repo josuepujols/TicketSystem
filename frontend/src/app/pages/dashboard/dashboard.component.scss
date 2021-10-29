@@ -1,11 +1,27 @@
 #tab-container {
-  height: 8vh !important;
-  //background-color: #e3e3e3;
-}
-.hover-tab:hover {
-  background-color: rgb(176, 182, 184);
+	margin: 3em auto 2em auto;
+	border-bottom: 2px solid gainsboro;
+	padding: 0.5em;
+	border-radius: 0.5em;
+	//background-color: #e3e3e3;
+	#navbar-list {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+	.hover-tab {
+		color: #2f5072;
+		font-weight: 550;
+		border: 2px solid gainsboro;
+	}
+	.hover-tab.active {
+		color: whitesmoke;
+		font-weight: 550;
+		background-color: #41729f !important;
+	}
 }
 
 .container {
-  width: 90% !important;
+	width: 90% !important;
+	margin-top: 3em;
 }

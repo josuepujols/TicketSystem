@@ -1,27 +1,45 @@
-<table class="table table-reponsive table-striped mt-5">
-    <thead class="thead-dark">
-        <tr>
-            <td class="th">#</td>
-            <td class="th">Nombre</td>
-            <td class="th">Descripcion</td>
-            <td class="th">Prioridad</td>
-            <td class="th">UserId</td>
-            <td class="th">AssignTo</td>
-            <td class="th">Completado</td>
-            <td class="th">Opciones</td>
-            <!-- <th class="th">Opciones</th> -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item in results; index as i">
-            <th scope="row">{{ i + 1}}</th>
-            <td>{{ item.title }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.importance }}</td>
-            <td>{{ item.userId }}</td>
-            <td>{{ item.assignTo }}</td>
-            <td>{{ item.isCompleted }}</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<div class="container-fluid">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th scope="col"comportance</th>
+				<th scope="col">Created</th>
+				<th scope="col">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of (results$ | async)?.records; index as i">
+				<th scope="row">{{ i + 1 }}</th>
+				<td>{{ item?.title }}</td>
+				<td>{{ item?.description }}</td>
+				<td>
+					<span *ngIf="item.importance == 1" class="tag text-danger"
+						>high</span
+					>
+					<span *ngIf="item.importance == 2" class="tag text-warning"
+						>medium</span
+					>
+					<span *ngIf="item.importance == 3" class="tag text-success"
+						>low</span
+					>
+				</td>
+				<td>{{ item?.created | date }}</td>
+				<td>
+					<span
+						*ngIf="item.isCompleted; else pending"
+						class="tag tag-success"
+						>completed</span
+					>
+					<ng-template #pending
+						><span class="tag tag-warning"
+							>pending</span
+						></ng-template
+					>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

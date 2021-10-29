@@ -1,22 +1,39 @@
 <div class="container">
-  <div id="tab-container" class="d-flex flex-row justify-content-center align-items-center w-100 mt-4">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs w-100 d-flex flex-row justify-content-center">
-      <li ngbNavItem  [ngbNavItem]="1" class="col-md-4 text-center">
-        <a ngbNavLink class="hover-tab">Tickets</a>
-        <ng-template ngbNavContent>
-          <app-tickets-table></app-tickets-table>
-        </ng-template>
-      </li>
-      <li ngbNavItem [ngbNavItem]="2" class="col-md-4 text-center">
-        <a ngbNavLink class="hover-tab">Registrar Ticket</a>
-        <ng-template ngbNavContent>
-          <app-add-ticket class="d-flex flex-row justify-content-center align-items-center"></app-add-ticket>
-        </ng-template>
-      </li>
-    </ul>
-  </div>
+	<div
+		id="tab-container"
+		class="
+			d-flex
+			flex-row
+			justify-content-center
+			align-items-center
+			w-100
+			mt-4
+		"
+	>
+		<ul ngbNav id="navbar-list" #nav="ngbNav" class="nav-pills w-100">
+			<li ngbNavItem [ngbNavItem]="1" class="col-md-4 text-center active">
+				<a ngbNavLink class="hover-tab">Tickets</a>
+				<ng-template ngbNavContent>
+					<app-tickets-table></app-tickets-table>
+				</ng-template>
+			</li>
+			<li ngbNavItem [ngbNavItem]="2" class="col-md-4 text-center">
+				<a ngbNavLink class="hover-tab">Registrar Ticket</a>
+				<ng-template ngbNavContent>
+					<app-add-ticket
+						class="
+							d-flex
+							flex-row
+							justify-content-center
+							align-items-center
+						"
+					></app-add-ticket>
+				</ng-template>
+			</li>
+		</ul>
+	</div>
 
-  <section id="ng-container">
-    <div [ngbNavOutlet]="nav"></div>
-  </section>
+	<section id="ng-container">
+		<div [ngbNavOutlet]="nav"></div>
+	</section>
 </div>

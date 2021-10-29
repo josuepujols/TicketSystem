@@ -2,7 +2,6 @@ import { ToastService } from './services/toast/toast.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,26 +18,36 @@ import { AddTicketComponent } from './components/add-ticket/add-ticket.component
 import { TicketsTableComponent } from './components/tickets-table/tickets-table.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    HomeComponent,
-    DashboardComponent,
-    RegisterFormComponent,
-    LoginFormComponent,
-    AddTicketComponent,
-    TicketsTableComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    FormsModule,
-    HttpClientModule,
-    ToastrModule.forRoot(),
-    BrowserAnimationsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavbarComponent,
+		HomeComponent,
+		DashboardComponent,
+		RegisterFormComponent,
+		LoginFormComponent,
+		AddTicketComponent,
+		TicketsTableComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		NgbModule,
+		FormsModule,
+		HttpClientModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-bottom-right',
+			progressBar: true,
+			progressAnimation: 'increasing',
+			iconClasses: {
+				error: 'toast-error',
+				info: 'toast-info',
+				success: 'toast-success',
+				warning: 'toast-warning',
+			},
+		}),
+		BrowserAnimationsModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,4 +6,5 @@ export interface ITicket {
 	userId?: string;
 	assignTo?: string;
 	isCompleted?: boolean;
+	created?: string;
 }

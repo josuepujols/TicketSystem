@@ -1,24 +1,36 @@
+.navbar {
+	background-color: #1c4670 !important;
+	.navbar-nav {
+		.nav-link {
+			font-weight: 600;
+		}
+	}
+}
+
 #img-logo {
 	width: 5%;
 	height: 5%;
+	position: absolute;
 }
 
 #dropdownBasic1 {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 #logo-title {
-	font-size: 25px;
+	font-size: 1.8rem;
 
 	#start-title {
 		color: #dc3545;
 		font-weight: bold;
 		font-style: oblique;
+		-webkit-text-stroke: 1px #e3e3e3;
 	}
 
 	#second-title {
 		color: #007bff;
 		font-weight: bold;
+		-webkit-text-stroke: 1px #e3e3e3;
 		//font-style: oblique;
 	}
 }

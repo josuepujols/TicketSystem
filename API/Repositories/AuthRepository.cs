@@ -34,7 +34,7 @@ namespace API.Repositories
         public async Task<LoginResponse> Login(LoginDTO model)
         {
             var doesExist = await UserExist(model.Username);
-            if(doesExist.Status) return new LoginResponse {  Status = !doesExist.Status };
+            if(!doesExist.Status) return new LoginResponse {  Status = !doesExist.Status };
 
             var user = await _usersRepo.SingleOrDefaultAsync(x => x.Username == model.Username);
 
@@ -42,7 +42,6 @@ namespace API.Repositories
             ? new LoginResponse { UserId = user.Id.ToString(), Username = user.Username, Token = GenerateToken(user), Role = user.Role.ToString(), Status = true }
             : new LoginResponse { Status = false };
 
-            throw new NotImplementedException();
         }
 
         private string GenerateToken(AppUser model)
@@ -90,7 +89,7 @@ namespace API.Repositories
         public async Task<ServerResponse> Register(RegisterDTO model)
         {
             var doesExist = await UserExist(model.Username);
-            if(!doesExist.Status) return doesExist;
+            if(doesExist.Status) return doesExist;
 
             CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -125,8 +124,8 @@ namespace API.Repositories
             var doesExist = await _usersRepo.AnyAsync<AppUser>(x => x.Username.ToLower() == username.ToLower());
             
             return doesExist 
-            ? new ServerResponse { Title = "User exists", Message = "This user is taken", Status = false }
-            : new ServerResponse { Title = "User available", Message = "This user can be used", Status = true };
+            ? new ServerResponse { Title = "User exists", Message = "This user is taken", Status = true }
+            : new ServerResponse { Title = "User available", Message = "This user can be used", Status = false };
         }
     }
 }
