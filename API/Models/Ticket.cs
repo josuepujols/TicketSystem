@@ -10,10 +10,11 @@ namespace API.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Priority Importance { get; set; }
-        public Guid UserId { get; set; }
-        public virtual AppUser User { get; set; }        
+        public Guid UserId { get; set; }       
         public Nullable<Guid> AssignTo { get; set; }
         public bool IsCompleted { get; set; } = false; 
+
+        public virtual AppUser User { get; set; } 
         
         public Ticket()
         {

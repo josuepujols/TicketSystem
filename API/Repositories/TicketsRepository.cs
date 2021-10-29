@@ -24,7 +24,7 @@ namespace API.Repositories
             return members.Select(x => new { x.Id, x.Username });            
         }
 
-        public async Task<PagedData<Ticket>> GetUserTickets(PaginationFilter filters, string userId)
+        public async Task<PagedData<TicketDTO>> GetUserTickets(PaginationFilter filters, string userId)
         {
             var tickets = await _context.Tickets
                 .Skip<Ticket>((filters.PageNumber - 1) * filters.PageSize)
@@ -34,12 +34,32 @@ namespace API.Repositories
 
                 var totalTickets = await _context.Tickets.CountAsync<Ticket>();
 
-                var response = new PagedData<Ticket>()
+                List<TicketDTO> AllTicket = new List<TicketDTO>();
+                
+
+                foreach(var item in tickets) {
+                    var user = await _context.AppUsers.FirstOrDefaultAsync(x => x.Id == item.AssignTo);
+                    TicketDTO DataSend = new TicketDTO() {
+                        Id = item.Id,
+                        Title = item.Title,
+                        Description = item.Description,
+                        Importance = item.Importance,
+                        UserId = item.UserId,
+                        AssignTo = item.AssignTo,
+                        IsCompleted = item.IsCompleted,
+                        Created = item.Created,
+                        UserName = user.Username
+                    };
+
+                    AllTicket.Add(DataSend);
+                }
+
+                var response = new PagedData<TicketDTO>()
                 {
                     TotalCount = totalTickets,
                     PageNumber = filters.PageNumber,
                     PageSize = filters.PageSize,
-                    Records = tickets
+                    Records = AllTicket
                 };
 
                 return response;

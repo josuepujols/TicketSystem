@@ -36,9 +36,7 @@ export class TicketsTableComponent implements OnInit {
 		const userId: string | null = sessionStorage.getItem('userId');
 
 		if (role != null && userId != null) {
-			role === 'Admin'
-				? this._ticket.getAllTickets(this.filters)
-				: this._ticket.getAllUserTickets(this.filters, userId);
+			this._ticket.getAllUserTickets(this.filters, userId);
 		}
 	}
 

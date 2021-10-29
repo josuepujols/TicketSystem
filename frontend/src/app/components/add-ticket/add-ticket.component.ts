@@ -74,7 +74,8 @@ export class AddTicketComponent implements OnInit {
       description: this.TicketDescripcion,
       importance: this.PriorityNumber,
       userId: UserId?.toString(),
-      assignTo: this.UserAssingId
+      assignTo: this.UserAssingId,
+      UserName: ""
     };
 
     if(this.TicketName != "" && this.PriorityNumber != 0 && this.UserAssingId != "Seleccione un Usuario") {
