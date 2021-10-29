@@ -9,7 +9,7 @@ namespace API.Interfaces
 {
     public interface ITicketRepository
     {
-        Task<PagedData<TicketDTO>> GetUserTickets(PaginationFilter filters, string userId);
+        Task<PagedData<Ticket>> GetUserTickets(PaginationFilter filters, string userId);
         Task<IEnumerable<object>> GetSupportPersonal();
     }
 }
