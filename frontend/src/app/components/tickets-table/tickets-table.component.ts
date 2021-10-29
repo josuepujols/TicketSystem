@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IPagedData } from 'src/app/Interfaces/ipaged-data';
 import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 import { ITicket } from 'src/app/Interfaces/iticket';
@@ -29,10 +29,9 @@ export class TicketsTableComponent implements OnInit {
 		const userId: string | null = sessionStorage.getItem('userId');
 
 		if (role != null && userId != null) {
-			const request =
-				role === 'Admin'
-					? this._ticket.getAllTickets(this.filters)
-					: this._ticket.getAllUserTickets(this.filters, userId);
+			role === 'Admin'
+				? this._ticket.getAllTickets(this.filters)
+				: this._ticket.getAllUserTickets(this.filters, userId);
 		}
 	}
 }

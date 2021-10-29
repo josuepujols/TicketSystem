@@ -9,3 +9,19 @@
 		padding: 0.5em;
 	}
 }
+
+.tag {
+	border-radius: 0.3em;
+	padding: 0.3em 0.4em;
+	font-weight: 600;
+}
+
+.tag-success {
+	background-color: rgb(101, 190, 101);
+	color: whitesmoke;
+}
+
+.tag-warning {
+	background-color: rgb(204, 192, 85);
+	color: black;
+}

@@ -35,7 +35,7 @@ namespace API
             services.AddControllers()
             .AddJsonOptions(options => {
                 options.JsonSerializerOptions.WriteIndented = true;
-                // options.JsonSerializerOptions.Converters.Add(); TODO: add custom Json converter
+                // options.JsonSerializerOptions.Converters.Add(); 
             });
             services.AddCors(opt => opt.AddPolicy(CustomPolicy, builder => {
                 builder.AllowAnyOrigin() // TODO: change this to exact domain (origin) later

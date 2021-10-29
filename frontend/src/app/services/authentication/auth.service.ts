@@ -34,19 +34,17 @@ export class AuthService {
 				if (data.status) {
 					this.saveSession(data);
 					this._shared.ClearForm();
-					this.$router.navigate(['dashboard']); // TODO: navigate to Dashboard Component, create the component
+					this.$router.navigate(['dashboard', data.username]); // TODO: navigate to Dashboard Component, create the component
 					this._toast.ShowSuccess({
 						title: 'login succed',
 						message: 'Welcome back',
 					});
-				}
-				else {
+				} else {
 					this._toast.ShowFailure({
 						title: 'Login failed',
 						message: 'Login process failed',
 					});
 				}
-				
 			});
 	}
 
@@ -63,7 +61,10 @@ export class AuthService {
 	}
 
 	register(model: IRegister): Observable<IServerResponse> {
-		return this.$http.post<IServerResponse>(this.endPoint + '/register', model);
+		return this.$http.post<IServerResponse>(
+			this.endPoint + '/register',
+			model
+		);
 	}
 
 	logout(): void {

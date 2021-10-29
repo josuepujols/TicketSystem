@@ -1,10 +1,45 @@
 <div class="container-fluid">
-	<div id="tickets-list" class="row">
-		<div
-			class="col-md-3"
-			*ngFor="let item of results$ | async | json; index as i"
-		>
-			{{ item }}
-		</div>
-	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th scope="col">Importance</th>
+				<th scope="col">Created</th>
+				<th scope="col">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of (results$ | async)?.records; index as i">
+				<th scope="row">{{ i + 1 }}</th>
+				<td>{{ item?.title }}</td>
+				<td>{{ item?.description }}</td>
+				<td>
+					<span *ngIf="item.importance == 1" class="tag text-danger"
+						>high</span
+					>
+					<span *ngIf="item.importance == 2" class="tag text-warning"
+						>medium</span
+					>
+					<span *ngIf="item.importance == 3" class="tag text-success"
+						>low</span
+					>
+				</td>
+				<td>{{ item?.created | date }}</td>
+				<td>
+					<span
+						*ngIf="item.isCompleted; else pending"
+						class="tag tag-success"
+						>completed</span
+					>
+					<ng-template #pending
+						><span class="tag tag-warning"
+							>pending</span
+						></ng-template
+					>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>

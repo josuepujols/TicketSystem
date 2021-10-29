@@ -11,7 +11,7 @@ import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 })
 export class TicketService {
 	private endPoint = environment.api_url + 'tickets';
-	private ticketSource = new AsyncSubject<IPagedData | null>();
+	private ticketSource = new ReplaySubject<IPagedData | null>();
 	public ticketsObserver$ = this.ticketSource.asObservable();
 
 	constructor(private $http: HttpClient) {}
@@ -42,7 +42,10 @@ export class TicketService {
 			.get<IPagedData>(`${this.endPoint}`, {
 				params: params,
 			})
-			.subscribe((data: IPagedData) => this.ticketSource.next(data));
+			.subscribe((data: IPagedData) => {
+				console.log(data);
+				this.ticketSource.next(data);
+			});
 	}
 
 	createTicket(model: ITicket): Observable<boolean> {
