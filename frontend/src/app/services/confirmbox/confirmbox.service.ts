@@ -14,11 +14,15 @@ export class ConfirmboxService {
     this._confirm.show();
   }
 
+  hideConfirmBox(): void {
+    this._confirm.hide();
+  }
+
   confirmChange(cond: boolean, id: string): void {
     if(cond) {
-      // TODO: delete ticket
-      console.log("show confirmation", cond);
-      this._ticket.deleteTicket(id)
+      // console.log("show confirmation", cond);
+      this._ticket.deleteTicket(id);
+      this.hideConfirmBox();
     }else {
       this._confirm.hide();
     }

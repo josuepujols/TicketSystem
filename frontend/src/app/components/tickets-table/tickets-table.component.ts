@@ -17,7 +17,7 @@ import { ConfirmboxService } from 'src/app/services/confirmbox/confirmbox.servic
 })
 export class TicketsTableComponent implements OnInit {
 	results$: Observable<IPagedData | null> = this._ticket.ticketsObserver$;
-  public UsersSupports:any[];
+  public UsersSupports!:any[];
 	filters: IPaginationFilter = {
 		pageNumber: 1,
 		pageSize: 10,
@@ -29,9 +29,8 @@ export class TicketsTableComponent implements OnInit {
 	faEye = faEye;
 	faTrash = faTrash;
 
-<<<<<<< HEAD
 	// Ticket to be remove from DB
-	private selectedTicket!: string | undefined;
+	private selectedTicket!: string;
 
 
 	confirmBoxProp = {
@@ -43,11 +42,6 @@ export class TicketsTableComponent implements OnInit {
 	};
 
 	constructor(private _ticket: TicketService, private _modal: ModalService, private _confirmBox: ConfirmboxService) {}
-=======
-	constructor(private _ticket: TicketService, private _modal: ModalService, private _toast:ToastService) {
-    this.UsersSupports = [];
-  }
->>>>>>> 20fd44a6d0b41732e92a6867563ce66155a7d475
 
 	ngOnInit(): void {
 		this.getTickets();
@@ -74,8 +68,10 @@ export class TicketsTableComponent implements OnInit {
 	}
 
 	deleteTicket(ticket: ITicket): void {
-		this.selectedTicket = ticket.id?.toString();
-		this._confirmBox.showConfirmBox();
+		if(ticket?.id) {
+			this.selectedTicket = ticket.id?.toString();
+			this._confirmBox.showConfirmBox();
+		}		
 	}
 
 	
