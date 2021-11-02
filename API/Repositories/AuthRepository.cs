@@ -34,7 +34,7 @@ namespace API.Repositories
         public async Task<LoginResponse> Login(LoginDTO model)
         {
             var doesExist = await UserExist(model.Username);
-            if(!doesExist.Status) return new LoginResponse {  Status = !doesExist.Status };
+            if(!doesExist.Status) return new LoginResponse {  Status = doesExist.Status };
 
             var user = await _usersRepo.SingleOrDefaultAsync(x => x.Username == model.Username);
 
@@ -124,8 +124,8 @@ namespace API.Repositories
             var doesExist = await _usersRepo.AnyAsync<AppUser>(x => x.Username.ToLower() == username.ToLower());
             
             return doesExist 
-            ? new ServerResponse { Title = "User exists", Message = "This user is taken", Status = true }
-            : new ServerResponse { Title = "User available", Message = "This user can be used", Status = false };
+            ? new ServerResponse { Title = "User exists", Message = "This user is taken", Status = doesExist }
+            : new ServerResponse { Title = "User available", Message = "This user can be used", Status = doesExist };
         }
     }
 }

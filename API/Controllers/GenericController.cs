@@ -25,7 +25,8 @@ namespace API.Controllers
             _repo = _uof.TRepository;
         }
 
-        [HttpGet]        
+        [HttpGet]   
+        [Authorize(Roles = UserRoles.Admin)]     
         public async Task<ActionResult> GetAll([FromQuery] PaginationFilter filters)
         {
             try
@@ -53,6 +54,7 @@ namespace API.Controllers
 
 
         [HttpPost("create")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> Create(T model)
         {
             try 
@@ -68,6 +70,7 @@ namespace API.Controllers
 
         
         [HttpPut("edit/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> Update(T model)
         {
             try 
@@ -83,6 +86,7 @@ namespace API.Controllers
 
        
         [HttpDelete("remove/{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> Delete(Guid id)
         {
              try 
