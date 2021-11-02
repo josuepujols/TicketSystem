@@ -77,7 +77,11 @@ export class AddTicketComponent implements OnInit {
       assignTo: this.UserAssingId
     };
 
-    if(this.TicketName != "" && this.PriorityNumber != 0 && this.UserAssingId != "Seleccione un Usuario") {
+    if(this.TicketName != "") {
+
+      if(NewTicket.assignTo == "Seleccione un Usuario") {
+        NewTicket.assignTo = "";
+      }
       this._ticket.createTicket(NewTicket).subscribe(data => {
         if (data) {
           this._toast.ShowSuccess({title: "Exito!", message: "Se ha registrado el ticket correctamente."});

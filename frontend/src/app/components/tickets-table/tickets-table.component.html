@@ -41,11 +41,9 @@
 					>
 				</td>
 				<td class="row justify-content-between pr-2">
-					<span class="btn text-secondary">
-						<fa-icon [icon]="faEdit"></fa-icon>
-					</span>
 					<span class="btn text-info" (click)="open(content)">
-						<fa-icon [icon]="faEye"></fa-icon>
+						<!-- <fa-icon [icon]="faEye"></fa-icon> -->
+            <fa-icon [icon]="faEdit"></fa-icon>
 					</span>
 					<span class="btn text-danger" (click)="deleteTicket(item)">
 						<fa-icon [icon]="faTrash"></fa-icon>
@@ -83,9 +81,9 @@
 							 <div class="form-group"><label for="">Prioridad: </label>
                 <select name="" id="" class="form-control" [(ngModel)]="item.importance">
                   <option disabled selected>Seleccionar Prioridad</option>
-                  <option class="text-success" value="1">Baja</option>
-                  <option class="text-warning" value="2">Promedio</option>
-                  <option class="text-danger" value="3">Alta</option>
+                  <option class="text-success" value=1>Baja</option>
+                  <option class="text-warning" value=2>Promedio</option>
+                  <option class="text-danger" value=3>Alta</option>
                </select>
               </div>
 						 </div>

@@ -70,7 +70,7 @@ namespace API.Controllers
 
         
         [HttpPut("edit/{id}")]
-        [Authorize(Roles = UserRoles.Admin)]
+        //[Authorize(Roles = UserRoles.Admin)]
         public async Task<ActionResult> Update(T model)
         {
             try 

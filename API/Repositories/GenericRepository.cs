@@ -7,6 +7,7 @@ using API.Data;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using API.DTO;
+using API.Models;
 using API.Abstraction;
 
 namespace API.Repositories
