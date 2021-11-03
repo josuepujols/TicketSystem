@@ -22,14 +22,18 @@ export class TicketService {
 		filters: IPaginationFilter,
 		userId: string
 	): Observable<IPagedData> {
+    console.log("Entro");
 		const params = new HttpParams()
 			.set('pageNumber', filters.pageNumber)
 			.set('pageSize', filters.pageSize)
 			.set('searchTerm', filters.searchTerm);
-
-		return this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all?`, {
+		const data =  this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all?`, {
 			params: params,
 		});
+    data.subscribe(data => {
+      console.log(data);
+    })
+    return data;
 	}
 
 	// For Admin Roles only

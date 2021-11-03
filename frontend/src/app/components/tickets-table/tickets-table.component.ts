@@ -5,6 +5,7 @@ import { IPagedData } from 'src/app/Interfaces/ipaged-data';
 import { IPaginationFilter } from 'src/app/Interfaces/ipagination-filter';
 import { ITicket } from 'src/app/Interfaces/iticket';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { Router } from '@angular/router';
 
 import { faEdit, faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ModalService } from 'src/app/services/modal/modal.service';
@@ -15,7 +16,7 @@ import { ConfirmboxService } from 'src/app/services/confirmbox/confirmbox.servic
 	templateUrl: './tickets-table.component.html',
 	styleUrls: ['./tickets-table.component.scss'],
 })
-export class TicketsTableComponent implements OnInit, OnChanges {
+export class TicketsTableComponent implements OnInit {
 	results$: Observable<IPagedData | null> = this._ticket.ticketsObserver$;
 	public UsersSupports: any[] = [];
 
@@ -45,8 +46,10 @@ export class TicketsTableComponent implements OnInit, OnChanges {
 		private _ticket: TicketService,
 		private _modal: ModalService,
 		private _confirmBox: ConfirmboxService,
-    private _toast:ToastService
+    private _toast:ToastService,
+    private router: Router
 	) {}
+
 
 	ngOnInit(): void {
 		this.getTickets();
@@ -56,15 +59,6 @@ export class TicketsTableComponent implements OnInit, OnChanges {
 			});
 		});
 	}
-
-  ngOnChanges() {
-    // changes.prop contains the old and the new value...
-    this.getTickets();
-  }
-  // ngOnChanges():void {
-  //   console.log("Works");
-  //   this.getTickets();
-  // }
 
 	getTickets(): void {
 		const role: string | null = sessionStorage.getItem('role');
@@ -76,6 +70,10 @@ export class TicketsTableComponent implements OnInit, OnChanges {
 				: this._ticket.getAllUserTickets(this.filters, userId);
 		}
 	}
+
+  change(){
+    this.getTickets();
+  }
 
 	open(content: any) {
 		this._modal.showModal(content);
@@ -92,12 +90,36 @@ export class TicketsTableComponent implements OnInit, OnChanges {
 		}
 	}
 
-	confirmChange(event: boolean): void {
+	confirmChange(event: boolean, item: ITicket): void {
+    let index:any = -1;
 		this._confirmBox.confirmChange(event, this.selectedTicket);
-    this.getTickets();
+    this.results$.subscribe(data => {
+      index = data?.records.indexOf(item);
+      if (index > -1) {
+        data?.records.splice(index, 1);
+        console.log(data?.records);
+        this.ngOnInit();
+
+        // this.router.navigateByUrl('/dashboard' + sessionStorage.getItem('username'), { skipLocationChange: false }).then(() => {
+        //   this.router.navigate(['dashboard/' + sessionStorage.getItem('username')]);
+        // });
+      }
+    });
 	}
 
-	UpdateTicket(ticket: ITicket) {
+
+	UpdateTicket(ticket: ITicket, IsStatus: boolean) {
+
+    //Compruebo si voy a actualizar solo el status
+    if (IsStatus) {
+      if (ticket.isCompleted) {
+        ticket.isCompleted = false;
+      }
+      else {
+        ticket.isCompleted = true;
+      }
+    }
+
     if (ticket.importance == 1) {
       ticket.importance = 1;
     }
@@ -111,6 +133,7 @@ export class TicketsTableComponent implements OnInit, OnChanges {
 		  if (data) {
 		    this._toast.ShowSuccess({title: "Exito!", message: "Se ha actualizado el ticket correctamente."});
         this.close();
+        this.ngOnInit();
 		  }
 		  else {
 		    this._toast.ShowFailure({title: "Error!", message: "No se pudo actualizado el ticket."});

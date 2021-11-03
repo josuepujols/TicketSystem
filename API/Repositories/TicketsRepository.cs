@@ -26,11 +26,13 @@ namespace API.Repositories
 
         public async Task<PagedData<Ticket>> GetUserTickets(PaginationFilter filters, string userId)
         {
-            var tickets = await _context.Tickets
+
+            var list =  _context.Tickets.Where(x => x.UserId.Equals(Guid.Parse(userId))).AsQueryable();
+
+            var tickets = list
                 .Skip<Ticket>((filters.PageNumber - 1) * filters.PageSize)
                 .Take<Ticket>(filters.PageSize)
-                .Where<Ticket>(x => x.UserId.Equals(Guid.Parse(userId)))
-                .ToListAsync<Ticket>();
+                .ToList<Ticket>();
 
                 var totalTickets = await _context.Tickets.CountAsync<Ticket>();
 

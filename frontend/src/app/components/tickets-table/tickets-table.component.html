@@ -1,3 +1,8 @@
+<form>
+  <div class="form-group form-inline w-100 pt-2">
+      <input [(ngModel)]="filters.searchTerm" [ngModelOptions]="{ standalone: true }" (ngModelChange)="change()" class="form-control ml-2 w-75" type="text" placeholder="Nombre del Ticket a Buscar"/>
+  </div>
+</form>
 <div class="container-fluid d-flex flex-row justify-content-center align-items-center">
 	<table class="table table-hover w-100 mt-4">
 		<thead>
@@ -8,7 +13,8 @@
 				<th scope="col">Importance</th>
 				<th scope="col">Created</th>
 				<th scope="col">Status</th>
-				<th scope="col"></th>
+				<th scope="col">Acciones</th>
+        <th>Completar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,14 +23,14 @@
 				<td>{{ item?.title }}</td>
 				<td>{{ item?.description }}</td>
 				<td>
-					<span *ngIf="item.importance == 1" class="tag danger"
-						>high</span
+					<span *ngIf="item.importance == 1" class="tag success"
+						>Baja</span
 					>
 					<span *ngIf="item.importance == 2" class="tag warning"
-						>medium</span
+						>Promedio</span
 					>
-					<span *ngIf="item.importance == 3" class="tag success"
-						>low</span
+					<span *ngIf="item.importance == 3" class="tag danger"
+						>Alta</span
 					>
 				</td>
 				<td>{{ item?.created | date: 'short' }}</td>
@@ -32,11 +38,11 @@
 					<span
 						*ngIf="item.isCompleted; else pending"
 						class="tag success"
-						>completada</span
+						>Completada</span
 					>
 					<ng-template #pending
 						><span class="tag warning"
-							>pendiente</span
+							>Pendiente</span
 						></ng-template
 					>
 				</td>
@@ -50,7 +56,17 @@
 					</span>
 				</td>
 
-				<ngx-confirm-box [bgColor]="confirmBoxProp.bgColor" [confirmHeading]="confirmBoxProp.confirmHeading" [confirmCanceltext]="confirmBoxProp.confirmCanceltext" [confirmContent]= "confirmBoxProp.confirmContent" [confirmOkaytext] = "confirmBoxProp.confirmOkaytext" (confirmEvt)="confirmChange($event)"></ngx-confirm-box>
+        <td id="col-button">
+          <button *ngIf="!item.isCompleted" type="button" class="btn btn-success" (click)="UpdateTicket(item, true)">
+            Completar
+          </button>
+          <button *ngIf="item.isCompleted" type="button" class="btn btn-warning" (click)="UpdateTicket(item, true)">
+            Pendiente
+          </button>
+
+        </td>
+
+				<ngx-confirm-box [bgColor]="confirmBoxProp.bgColor" [confirmHeading]="confirmBoxProp.confirmHeading" [confirmCanceltext]="confirmBoxProp.confirmCanceltext" [confirmContent]= "confirmBoxProp.confirmContent" [confirmOkaytext] = "confirmBoxProp.confirmOkaytext" (confirmEvt)="confirmChange($event, item)"></ngx-confirm-box>
 
 				<!-- modal template -->
 				<ng-template #content let-c="close" let-d="dismiss">
@@ -90,7 +106,7 @@
 					 </div>
 					</div>
 					<div class="modal-footer">
-					  <button type="button" class="btn btn-outline-dark mr-3" (click)="UpdateTicket(item)">Guardar</button>
+					  <button type="button" class="btn btn-outline-dark mr-3" (click)="UpdateTicket(item, false)">Guardar</button>
 					</div>
 				  </ng-template>
 			</tr>

@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
     username = this._auth.currentUser$;
     isAuthenticated = this._auth.isAuthenticated$;
-    
+
     constructor(private _auth: AuthService) {
     }
 
@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit {
 
     logout(): void {
       this._auth.logout();
+      window.location.reload();
+      window.location.pathname = "/home";
     }
 
 }

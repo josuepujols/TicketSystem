@@ -4,7 +4,7 @@ export interface ITicket {
 	description: string;
 	importance: number;
 	userId?: string;
-	assignTo: string | null;
+	assignTo?: string;
 	isCompleted?: boolean;
 	created?: string;
 }
