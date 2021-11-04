@@ -56,6 +56,7 @@ export class TicketsTableComponent implements OnInit {
     this.IsAdmin = false;
     this.SelectString = "Filtrar por Estatus";
     this.TicketsLength = 0;
+    this.getTickets();
   }
 
 
