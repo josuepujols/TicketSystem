@@ -14,6 +14,7 @@ export class ConfirmboxService {
 		pageNumber: 1,
 		pageSize: 10,
 		searchTerm: '',
+    numberStatus: 0
 	};
   constructor(private _confirm: NgxConfirmBoxService, private _ticket: TicketService) { }
 

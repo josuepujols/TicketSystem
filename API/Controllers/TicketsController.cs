@@ -34,6 +34,17 @@ namespace API.Controllers
 
         }
 
+        [HttpGet("GetTicketsAdmin")]
+        public async Task<ActionResult<PagedData<Ticket>>> GetAllAdminAsync([FromQuery] PaginationFilter filters) {
+            try {
+                var response = await _repo.GetAllAdminAsync(filters);
+                return Ok(response);
+            }
+            catch(Exception ex) {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpGet("{userId}/all")]
         public async Task<ActionResult<PagedData<Ticket>>> GetAllUserTickets([FromQuery] PaginationFilter filters, string userId)
         {

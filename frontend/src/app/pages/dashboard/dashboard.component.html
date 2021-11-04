@@ -17,7 +17,7 @@
 					<app-tickets-table></app-tickets-table>
 				</ng-template>
 			</li>
-			<li ngbNavItem [ngbNavItem]="2" class="col-md-4 text-center">
+			<li *ngIf="IsAdmin" ngbNavItem [ngbNavItem]="2" class="col-md-4 text-center">
 				<a ngbNavLink class="hover-tab">Registrar Ticket</a>
 				<ng-template ngbNavContent>
 					<app-add-ticket

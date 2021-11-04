@@ -19,11 +19,14 @@ import { ConfirmboxService } from 'src/app/services/confirmbox/confirmbox.servic
 export class TicketsTableComponent implements OnInit {
 	results$: Observable<IPagedData | null> = this._ticket.ticketsObserver$;
 	public UsersSupports: any[] = [];
+  public IsAdmin: boolean;
+  public SelectString: string;
 
 	filters: IPaginationFilter = {
 		pageNumber: 1,
 		pageSize: 10,
 		searchTerm: '',
+    numberStatus: 0
 	};
 
 	// actions icons
@@ -48,7 +51,10 @@ export class TicketsTableComponent implements OnInit {
 		private _confirmBox: ConfirmboxService,
     private _toast:ToastService,
     private router: Router
-	) {}
+	) {
+    this.IsAdmin = false;
+    this.SelectString = "Filtrar por Estatus";
+  }
 
 
 	ngOnInit(): void {
@@ -65,15 +71,16 @@ export class TicketsTableComponent implements OnInit {
 		const userId: string | null = sessionStorage.getItem('userId');
 
 		if (role != null && userId != null) {
-			role === 'Admin'
-				? this._ticket.getAllTickets(this.filters)
-				: this._ticket.getAllUserTickets(this.filters, userId);
+      if (role === 'Admin') {
+        this._ticket.getAllTickets(this.filters);
+        this.IsAdmin = true;
+      }
+      else {
+        this._ticket.getAllUserTickets(this.filters, userId);
+        this.IsAdmin = false;
+      }
 		}
 	}
-
-  change(){
-    this.getTickets();
-  }
 
 	open(content: any) {
 		this._modal.showModal(content);
@@ -103,6 +110,7 @@ export class TicketsTableComponent implements OnInit {
         // this.router.navigateByUrl('/dashboard' + sessionStorage.getItem('username'), { skipLocationChange: false }).then(() => {
         //   this.router.navigate(['dashboard/' + sessionStorage.getItem('username')]);
         // });
+        window.location.reload();
       }
     });
 	}

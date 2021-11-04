@@ -9,10 +9,21 @@ export class DashboardComponent implements OnInit {
 
   active = 'top';
 
-  constructor() { }
+  public IsAdmin:boolean;
+
+  constructor() {
+    this.IsAdmin = false;
+   }
 
   ngOnInit(): void {
+    if (sessionStorage.getItem('role') === 'Admin') {
+      this.IsAdmin = true;
+    }
+    else {
+      this.IsAdmin = false;
+    }
 
+    console.log(this.IsAdmin);
   }
 
 }

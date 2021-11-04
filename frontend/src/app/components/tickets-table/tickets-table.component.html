@@ -1,6 +1,11 @@
 <form>
-  <div class="form-group form-inline w-100 pt-2">
-      <input [(ngModel)]="filters.searchTerm" [ngModelOptions]="{ standalone: true }" (ngModelChange)="change()" class="form-control ml-2 w-75" type="text" placeholder="Nombre del Ticket a Buscar"/>
+  <div class="form-group form-inline w-100 pt-2 d-flex flex-row justify-content-center align-items-center">
+      <input [(ngModel)]="filters.searchTerm" [ngModelOptions]="{ standalone: true }" (ngModelChange)="getTickets()" class="form-control ml-2 w-75" type="text" placeholder="Nombre del Ticket a Buscar"/>
+      <select (change)="getTickets()" [(ngModel)]="filters.numberStatus" [ngModelOptions]="{ standalone: true }" id="select-status" class="form-control ml-4 col-2">
+        <option value=0 selected>Todas</option>
+        <option value=1>Completadas</option>
+        <option value=2>Pendientes</option>
+      </select>
   </div>
 </form>
 <div class="container-fluid d-flex flex-row justify-content-center align-items-center">
@@ -13,7 +18,7 @@
 				<th scope="col">Importance</th>
 				<th scope="col">Created</th>
 				<th scope="col">Status</th>
-				<th scope="col">Acciones</th>
+				<th scope="col" *ngIf="IsAdmin">Acciones</th>
         <th>Completar</th>
 			</tr>
 		</thead>
@@ -46,7 +51,7 @@
 						></ng-template
 					>
 				</td>
-				<td class="row justify-content-between pr-2">
+				<td *ngIf="IsAdmin" class="row justify-content-between pr-2">
 					<span class="btn text-info" (click)="open(content)">
 						<!-- <fa-icon [icon]="faEye"></fa-icon> -->
             <fa-icon [icon]="faEdit"></fa-icon>
@@ -58,10 +63,10 @@
 
         <td id="col-button">
           <button *ngIf="!item.isCompleted" type="button" class="btn btn-success" (click)="UpdateTicket(item, true)">
-            Completar
+            Pasar a Completar
           </button>
           <button *ngIf="item.isCompleted" type="button" class="btn btn-warning" (click)="UpdateTicket(item, true)">
-            Pendiente
+            Pasar a Pendiente
           </button>
 
         </td>

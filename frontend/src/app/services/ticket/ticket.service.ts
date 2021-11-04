@@ -26,12 +26,14 @@ export class TicketService {
 		const params = new HttpParams()
 			.set('pageNumber', filters.pageNumber)
 			.set('pageSize', filters.pageSize)
-			.set('searchTerm', filters.searchTerm);
+			.set('searchTerm', filters.searchTerm)
+      .set('numberStatus', filters.numberStatus);
 		const data =  this.$http.get<IPagedData>(`${this.endPoint}/${userId}/all?`, {
-			params: params,
+			params: params
 		});
     data.subscribe(data => {
       console.log(data);
+      this.ticketSource.next(data);
     })
     return data;
 	}
@@ -41,10 +43,11 @@ export class TicketService {
 		const params = new HttpParams()
 			.set('pageNumber', filters.pageNumber)
 			.set('pageSize', filters.pageSize)
-			.set('searchTerm', filters.searchTerm);
+			.set('searchTerm', filters.searchTerm)
+      .set('numberStatus', filters.numberStatus);
 
 		this.$http
-			.get<IPagedData>(`${this.endPoint}`, {
+			.get<IPagedData>(`${this.endPoint}/GetTicketsAdmin`, {
 				params: params,
 			})
 			.subscribe((data: IPagedData) => {
