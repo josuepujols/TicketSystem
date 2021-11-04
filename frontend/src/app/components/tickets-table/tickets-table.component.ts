@@ -21,10 +21,11 @@ export class TicketsTableComponent implements OnInit {
 	public UsersSupports: any[] = [];
   public IsAdmin: boolean;
   public SelectString: string;
+  public TicketsLength:number;
 
 	filters: IPaginationFilter = {
 		pageNumber: 1,
-		pageSize: 10,
+		pageSize: 5,
 		searchTerm: '',
     numberStatus: 0
 	};
@@ -54,6 +55,7 @@ export class TicketsTableComponent implements OnInit {
 	) {
     this.IsAdmin = false;
     this.SelectString = "Filtrar por Estatus";
+    this.TicketsLength = 0;
   }
 
 
@@ -67,6 +69,7 @@ export class TicketsTableComponent implements OnInit {
 	}
 
 	getTickets(): void {
+    console.log(this.filters);
 		const role: string | null = sessionStorage.getItem('role');
 		const userId: string | null = sessionStorage.getItem('userId');
 
@@ -80,6 +83,10 @@ export class TicketsTableComponent implements OnInit {
         this.IsAdmin = false;
       }
 		}
+
+    this.results$.subscribe(data => {
+      this.TicketsLength = data?.totalCount as number;
+    });
 	}
 
 	open(content: any) {

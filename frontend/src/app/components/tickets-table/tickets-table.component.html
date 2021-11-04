@@ -118,3 +118,11 @@
 		</tbody>
 	</table>
 </div>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="TicketsLength" [page]="filters.pageNumber" [pageSize]="filters.pageSize" (pageChange)="getTickets()"></ngb-pagination>
+  <select class="custom-select" style="width: auto" [(ngModel)]="filters.pageSize" (ngModelChange)="getTickets()">
+    <option [ngValue]="5">5</option>
+    <option [ngValue]="10">10</option>
+    <option selected [ngValue]="15">15</option>
+  </select>
+</div>
