@@ -25,7 +25,7 @@ export class TicketsTableComponent implements OnInit {
 
 	filters: IPaginationFilter = {
 		pageNumber: 1,
-		pageSize: 5,
+		pageSize: 10,
 		searchTerm: '',
     numberStatus: 0
 	};
@@ -88,6 +88,7 @@ export class TicketsTableComponent implements OnInit {
     this.results$.subscribe(data => {
       this.TicketsLength = data?.totalCount as number;
     });
+    console.log(this.TicketsLength)
 	}
 
 	open(content: any) {
@@ -115,10 +116,10 @@ export class TicketsTableComponent implements OnInit {
         console.log(data?.records);
         this.ngOnInit();
 
-        // this.router.navigateByUrl('/dashboard' + sessionStorage.getItem('username'), { skipLocationChange: false }).then(() => {
-        //   this.router.navigate(['dashboard/' + sessionStorage.getItem('username')]);
-        // });
-        window.location.reload();
+        this.router.navigateByUrl('/dashboard' + sessionStorage.getItem('username'), { skipLocationChange: false }).then(() => {
+          this.router.navigate(['dashboard/' + sessionStorage.getItem('username')]);
+        });
+        //window.location.reload();
       }
     });
 	}

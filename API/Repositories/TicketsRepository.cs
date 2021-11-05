@@ -45,10 +45,10 @@ namespace API.Repositories
             else if (filters.NumberStatus == 2) {
                 query = query.Where(x => !x.IsCompleted);
             }
-
+            int totalRecords = await query.CountAsync<Ticket>();
             var pagedData = await query.Skip<Ticket>((filters.PageNumber - 1) * filters.PageSize).Take<Ticket>(filters.PageSize).OrderBy(x => x.Title).ToListAsync();
             
-            var totalRecords = pagedData.Count; 
+            //var totalRecords = pagedData.Count; 
 
             return new PagedData<Ticket> 
             { 
@@ -83,10 +83,12 @@ namespace API.Repositories
                  }
              }
 
+            int totalTickets = await query.CountAsync<Ticket>(); 
+
             var tickets = await query.Skip<Ticket>((filters.PageNumber - 1) * filters.PageSize).Take<Ticket>(filters.PageSize).ToListAsync();
 
             // var totalTickets = await _context.Tickets.CountAsync<Ticket>();
-            int totalTickets = tickets.Count;
+            //int totalTickets = await _context.Tickets.CountAsync();
 
             var response = new PagedData<Ticket>()
             {

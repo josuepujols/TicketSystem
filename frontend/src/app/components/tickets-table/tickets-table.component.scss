@@ -10,6 +10,11 @@
 	}
 }
 
+#container-ticket {
+  overflow-y: auto;
+  height: 60vh;
+}
+
 #select-status {
   cursor: pointer;
 }

@@ -8,16 +8,16 @@
       </select>
   </div>
 </form>
-<div class="container-fluid d-flex flex-row justify-content-center align-items-center">
+<div id="container-ticket" class="container-fluid d-flex flex-row justify-content-center">
 	<table class="table table-hover w-100 mt-4">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col">Title</th>
-				<th scope="col">Description</th>
-				<th scope="col">Importance</th>
-				<th scope="col">Created</th>
-				<th scope="col">Status</th>
+				<th scope="col">Titulo</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Prioridad</th>
+				<th scope="col">Fecha de Creacion</th>
+				<th scope="col">Estatus</th>
 				<th scope="col" *ngIf="IsAdmin">Acciones</th>
         <th>Completar</th>
 			</tr>
@@ -119,10 +119,11 @@
 	</table>
 </div>
 <div class="d-flex justify-content-between p-2">
-  <ngb-pagination [collectionSize]="TicketsLength" [(page)]="filters.pageNumber" [pageSize]="filters.pageSize" (pageChange)="getTickets()"></ngb-pagination>
+<ngb-pagination [collectionSize]="TicketsLength" [(page)]="filters.pageNumber" aria-label="Default pagination" (pageChange)="getTickets()"></ngb-pagination>
+  <!-- <ngb-pagination [collectionSize]="TicketsLength + 1" [(page)]="filters.pageNumber" [pageSize]="filters.pageSize" (pageChange)="getTickets()"></ngb-pagination> -->
   <select class="custom-select" style="width: auto" [(ngModel)]="filters.pageSize" (ngModelChange)="getTickets()">
-    <option [ngValue]="5">5</option>
     <option [ngValue]="10">10</option>
-    <option selected [ngValue]="15">15</option>
+    <option [ngValue]="20">20</option>
+    <option selected [ngValue]="30">30</option>
   </select>
 </div>
