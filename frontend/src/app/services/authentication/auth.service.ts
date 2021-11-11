@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ILogin } from '../../Interfaces/ilogin';
 import { ILoginResponse } from 'src/app/Interfaces/ilogin-response';
 import { IRegister } from 'src/app/Interfaces/iRegister';
@@ -28,8 +28,14 @@ export class AuthService {
 	) {}
 
 	login(model: ILogin): void {
+    let headers = new HttpHeaders({
+      'Content-Type':'application/x-www-form-urlencoded'
+    });
 		this.$http
-			.post<ILoginResponse>(this.endPoint + '/login', model)
+			.post<ILoginResponse>(this.endPoint + '/login', model, {headers: let headers = new HttpHeaders({
+        'Content-Type':'application/x-www-form-urlencoded',
+        'producto': term
+      });})
 			.subscribe((data: ILoginResponse) => {
 				if (data.status) {
 					this.saveSession(data);

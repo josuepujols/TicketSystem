@@ -24,7 +24,7 @@ namespace API.Services
             //     services.AddDbContext<ApiContext>(opt => opt.UseSqlite(configuration.GetConnectionString("DevConnection"))); 
             // }
             
-            services.AddDbContext<ApiContext>(opt => opt.UseSqlite(configuration.GetConnectionString("DevConnection"))); 
+            services.AddDbContext<ApiContext>(opt => opt.UseSqlite(configuration.GetConnectionString("ProductionConnection"))); 
 
             return services;
             
